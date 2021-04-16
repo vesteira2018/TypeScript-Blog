@@ -15,11 +15,29 @@ ejs(app, {
 });
 
 //Router
+//메인페이지 라우팅
 router.get('/', async(ctx: any, next: Function) => {
 	await ctx.render('main')
 });
+//게시글 작성 라우팅
+router.get('/edit', async(ctx: any, next: Function) => {
+	await ctx.render('edit')
+});
+//방명록 작성 라우팅
+router.get('/board', async(ctx: any, next: Function) => {
+	await ctx.render('./board/board')
+});
+//프로필 라우팅
+router.get('/profile', async(ctx: any, next: Function) => {
+	await ctx.render('profile')
+});
+//로그인 라우팅
+router.get('/signin', async(ctx: any, next: Function) => {
+	await ctx.render('./account/signin')
+});
 
 app.use(serve(__dirname));
+//라우팅 미들웨어 사용
 app.use(router.routes());
 app.use(router.allowedMethods());
 
