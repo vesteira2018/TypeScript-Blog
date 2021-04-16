@@ -1,5 +1,5 @@
 # Blog
-Caramella Inc. TypeScript Toy Project
+Caramella Inc. TypeScript Toy Project  
 TypeScript와 Koa Framework를 이용해 간단한 블로그와 게시판 기능을 제작
 
 ## Period
