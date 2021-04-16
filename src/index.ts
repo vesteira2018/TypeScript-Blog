@@ -1,5 +1,6 @@
 const koa = require('koa');
 const ejs = require('koa-ejs');
+const serve = require('koa-static');
 const path = require('path');
 const Router = require('koa-router');
 
@@ -18,6 +19,7 @@ router.get('/', async(ctx: any, next: Function) => {
 	await ctx.render('main')
 });
 
+app.use(serve(__dirname));
 app.use(router.routes());
 app.use(router.allowedMethods());
 
