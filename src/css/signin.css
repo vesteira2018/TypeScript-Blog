@@ -1,0 +1,10 @@
+/* SIGN IN */
+.inner {
+    position: relative;
+}
+form {
+    position: absolute;
+    width: 70%;
+    height: 500px;
+    border: 2px solid #333;
+}

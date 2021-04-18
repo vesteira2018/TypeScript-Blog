@@ -1,8 +1,11 @@
+import { mongo } from "mongoose";
+
 const koa = require('koa');
 const ejs = require('koa-ejs');
 const serve = require('koa-static');
 const path = require('path');
 const Router = require('koa-router');
+const mongoose = require('mongoose');
 
 const app = new koa();
 const router = new Router();
@@ -13,6 +16,20 @@ ejs(app, {
 	viewExt: 'ejs',
 	layout: false
 });
+
+//MongoDB
+//지원중단 경고 수정
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
+const uri = 'mongodb://localhost:27017/testTable';
+const db = mongoose.connect(uri, (err: any) => {
+	if (err) {
+		console.log(err.message);
+	} else {
+		console.log('MongoDB Linked!');
+	}
+});
+
 
 //Router
 //메인페이지 라우팅

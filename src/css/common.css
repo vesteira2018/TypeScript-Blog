@@ -111,3 +111,6 @@ a {
 .content .inner {
 	padding: 20px;
 }
+.content .inner h1 {
+	margin-left: 30px;
+}
