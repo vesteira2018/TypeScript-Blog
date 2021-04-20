@@ -67,7 +67,41 @@ mysqld_safe A mysqld process already exists
 Oracle SQL을 사용했기 때문에 MySQL로 데이터베이스를 구축하는 것을 목표로 잡았습니다.  
 mysql을 강제로 shutdown시키고 실행시키는 방법으로 접근하다가 예제가 많았던 mongodb로 전환하였습니다.    
 그러나 NoSQL을 바로 사용해보려는 것이 익숙치 않아 다시 MySQL을 실행시켜보고자 했습니다.  
-root의 비밀번호 변경 후 mysql로 실행 가능하다는 것을 알게 되었고 작업을 진행했습니다.
+root의 비밀번호 변경 후 mysql로 실행 가능하다는 것을 알게 되었고 작업을 진행했습니다.  
+<br />
+
+- MySQL을 연결하는 과정에서 다음과 같은 문제가 발생하였습니다.
+```
+async function query(sql: string) {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '****',
+        database: 'donghun',
+        port: 3306
+    });
+    
+    connection.connect();
+    try {
+        let result = connection.query(sql);
+        console.log(`SUCCESS : ${result}`);
+        return result;
+    } catch (error) {
+        console.log(`ERROR : ${error}`);
+        throw error;
+    } finally {
+        connection.end();
+    }
+}
+
+Error: Cannot enqueue Handshake after already enqueuing a Handshake.
+```
+createConnection()에서 이미 MySQL 연결이 진행되는 것이었는데 연결을 생성하고 준비하는 것으로만 해석했기 때문에  
+```
+connection.connect();
+connection.end();
+```
+중복연결을 하는 문제가 발생했고 위의 코드를 지우는 것으로 해결되었습니다.
 
 
 ## 현재 문제점
@@ -86,4 +120,10 @@ function(done) {
 }  
 ```
 callback function이 이미 있다고 생각하는데 이와 같이 출력되니 답답합니다.  
-오류가 아니라서 구글링으로는 찾아지지도 않습니다.
+오류가 아니라서 구글링으로는 찾아지지도 않습니다.  
+<br />
+
+- TypeScript로 작성 시 매개변수의 Type을 작성하는데 어려움이 있습니다.
+구글링으로 찾을 수 있는 대부분의 Node.js를 이용한 게시판 제작은 JavaScript를 이용하여 작성되었습니다.  
+TypeScript에 맞게 코드를 작성해보면 작동되지 않거나 오류가 생겨 작동 시도조차 되지 않는 경우가 대다수였습니다.  
+Type을 작성 시 어떤 타입의 매개변수가 들어오는지 바로 알기 어려워 :any로 작성하는 경우가 많았습니다.  
