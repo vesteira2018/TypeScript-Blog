@@ -24,18 +24,48 @@ TypeScript와 Koa Framework를 이용해 간단한 블로그와 게시판 기능
 
 ## Structure
 > node_modules : Node.js의 모듈이 담긴 폴더  
-> src : 출력화면(.ejs),  
-> > 
+> src  
+>> css : css stylesheet  
+>> database : MySQL과 연결하는 mapper 파일 (.ts)  
+>> images : 화면 구성에 사용되는 이미지 파일 (.jpg, .png)  
+>> routes : 화면 연결에 사용되는 라우터 파일 (.ts)  
+>> views : 출력화면 (.ejs)  
+>>> board : 블로그 게시글  
+>>> guest : 블로그 방명록  
+>>> include : 측면 메뉴 등 여러 번 사용하기 위한 파일  
 > .gitignore : 재설치 가능한 node_modules를 Git 커밋에서 제외  
 > package.json / package-lock.json : 사용한 Node.js 모듈, Git 저장소 등 의존성 표시  
 > README.md : 프로젝트 보고서  
 > tsconfig.json : 프로젝트를 컴파일하는 데 필요한 루트 파일과 컴파일러 옵션을 지정  
 
 ## 
-- MySQL 설치 오류 : 
+- 타인이 작성한 nvm 설치 방법을 따라가다 다음과 같은 문제가 발생하였습니다.
+```
+-bash: nvm: command not found  
+```
+nvm을 설치했음에도, 터미널을 재실행했음에도, 맥 자체를 재부팅했음에도  
+커맨드를 찾지 못하는 bash의 문제는 재설치를 해도 해결되지 않아  
+다음과 같은 임시 해결책을 사용했었습니다.
+```
+source ~/.nvm/nvm.sh
+```
+이후 zsh 환경에서는 위와 같은 명령어를 입력하지 않고도 nvm이 작동해서 zsh에서 작업을 진행했고  
+나중에 bash에서도 nvm이 작동되었습니다.  
+<br />
+
+- MySQL을 실행하는 과정에서 다음과 같은 문제가 발생하였습니다.
+```
+$ mysql.server start
+mysqld_safe A mysqld process already exists
+```
+Oracle SQL을 사용했기 때문에 MySQL로 데이터베이스를 구축하는 것을 목표로 잡았습니다.  
+mysql을 강제로 shutdown시키고 실행시키는 방법으로 접근하다가 예제가 많았던 mongodb로 전환하였습니다.    
+그러나 NoSQL을 바로 사용해보려는 것이 익숙치 않아 다시 MySQL을 실행시켜보고자 했습니다.  
+root의 비밀번호 변경 후 mysql로 실행 가능하다는 것을 알게 되었고 작업을 진행했습니다.
+
 
 ## 현재 문제점
-- MySQL에서 데이터가 가져와지지 않고 다음과 같이 출력된다.  
+- MySQL에서 데이터가 가져와지지 않고 다음과 같이 출력됩니다.  
 ```
 function(done) {  
     // Add a custom callback to provided args   
@@ -49,3 +79,5 @@ function(done) {
     fn.apply(ctx, args);  
 }  
 ```
+callback function이 이미 있다고 생각하는데 이와 같이 출력되니 답답합니다.  
+오류가 아니라서 구글링으로는 찾아지지도 않습니다.

@@ -1,6 +1,6 @@
 const mysql = require('koa-mysql');
 
-async function query(sql: string) {
+function query(sql: string) {
     const connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
