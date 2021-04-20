@@ -1,11 +1,13 @@
-import { mongo } from "mongoose";
+import { Context } from "koa";
+import { Request, Response } from "koa";
 
 const koa = require('koa');
 const ejs = require('koa-ejs');
 const serve = require('koa-static');
 const path = require('path');
 const Router = require('koa-router');
-const mongoose = require('mongoose');
+const bodyParser = require('koa-bodyparser');
+const db = require("./database/board");
 
 const app = new koa();
 const router = new Router();
@@ -17,49 +19,35 @@ ejs(app, {
 	layout: false
 });
 
-//MongoDB
-//지원중단 경고 수정
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
-const uri = 'mongodb://localhost:27017/testTable';
-const db = mongoose.connect(uri, (err: any) => {
-	if (err) {
-		console.log(err.message);
-	} else {
-		console.log('MongoDB Linked!');
-	}
-});
-
-
-//Router
-//메인페이지 라우팅
-router.get('/', async(ctx: any, next: Function) => {
-	await ctx.render('main')
-});
-//게시글 작성 라우팅
-router.get('/edit', async(ctx: any, next: Function) => {
-	await ctx.render('edit')
-});
-//방명록 작성 라우팅
-router.get('/board', async(ctx: any, next: Function) => {
-	await ctx.render('./board/board')
-});
-//프로필 라우팅
-router.get('/profile', async(ctx: any, next: Function) => {
-	await ctx.render('profile')
-});
-//로그인 라우팅
-router.get('/signin', async(ctx: any, next: Function) => {
-	await ctx.render('./account/signin')
-});
-
+//koa-bodyparser
+app.use(bodyParser());
 app.use(serve(__dirname));
 //라우팅 미들웨어 사용
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+//Router
+//메인페이지 라우팅
+router.get('/', async(ctx: Context) => {
+	const board = await db.getBoard();
+	console.log(`INDEX : ${board}`);
+	await ctx.render('main', {board: board});
+});
+//게시글 작성 라우팅
+router.get('/edit', async(ctx: Context) => {
+	await ctx.render('./board/edit');
+});
+//방명록 작성 라우팅
+router.get('/guest', async(ctx: Context) => {
+	await ctx.render('./guest/guest');
+});
+//프로필 라우팅
+router.get('/profile', async(ctx: Context) => {
+	await ctx.render('profile');
+});
+
 //Port Settings
 const portNo: number = 4000;
 app.listen(portNo, () => {
-	console.log('Server Start! http://localhost:' + portNo);
+	console.log(`Server Start! http://localhost:${portNo}`);
 });
