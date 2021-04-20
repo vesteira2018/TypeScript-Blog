@@ -20,7 +20,10 @@ a {
 
 /* SIDE-MENU */
 .side-menu {
-	background-color: lavender;
+	background-image: url("../images/side-menu-bg.jpeg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 	width: 25%;
 	height: 100%;
 	position: fixed;
@@ -64,6 +67,11 @@ a {
 }
 .side-menu .profile .blog-title {
 	font-size: 30px;
+	text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+}
+.side-menu .profile .blog-subtitle {
+	font-size: 20px;
+	text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
 }
 .side-menu .profile .email,
 .side-menu .profile .github {
@@ -71,6 +79,7 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
 }
 .side-menu .profile .email a span,
 .side-menu .profile .github a span {
