@@ -23,22 +23,22 @@ TypeScript와 Koa Framework를 이용해 간단한 블로그와 게시판 기능
 - 방명록 CRUD (X)
 
 ## Structure
-> node_modules : Node.js의 모듈이 담긴 폴더  
-> src  
->> css : css stylesheet  
->> database : MySQL과 연결하는 mapper 파일 (.ts)  
->> images : 화면 구성에 사용되는 이미지 파일 (.jpg, .png)  
->> routes : 화면 연결에 사용되는 라우터 파일 (.ts)  
->> views : 출력화면 (.ejs)  
->>> board : 블로그 게시글  
->>> guest : 블로그 방명록  
->>> include : 측면 메뉴 등 여러 번 사용하기 위한 파일  
-> .gitignore : 재설치 가능한 node_modules를 Git 커밋에서 제외  
-> package.json / package-lock.json : 사용한 Node.js 모듈, Git 저장소 등 의존성 표시  
-> README.md : 프로젝트 보고서  
-> tsconfig.json : 프로젝트를 컴파일하는 데 필요한 루트 파일과 컴파일러 옵션을 지정  
+- node_modules : Node.js의 모듈이 담긴 폴더  
+- src  
+    - css : css stylesheet  
+    - database : MySQL과 연결하는 mapper 파일 (.ts)  
+    - images : 화면 구성에 사용되는 이미지 파일 (.jpg, .png)  
+    - routes : 화면 연결에 사용되는 라우터 파일 (.ts)  
+    - views : 출력화면 (.ejs)  
+        - board : 블로그 게시글  
+        - guest : 블로그 방명록  
+        - include : 측면 메뉴 등 여러 번 사용하기 위한 파일  
+- .gitignore : 재설치 가능한 node_modules를 Git 커밋에서 제외  
+- package.json / package-lock.json : 사용한 Node.js 모듈, Git 저장소 등 의존성 표시  
+- README.md : 프로젝트 보고서  
+- tsconfig.json : 프로젝트를 컴파일하는 데 필요한 루트 파일과 컴파일러 옵션을 지정  
 
-## 
+## 이전 문제점 및 해결방안
 - 타인이 작성한 nvm 설치 방법을 따라가다 다음과 같은 문제가 발생하였습니다.
 ```
 -bash: nvm: command not found  
