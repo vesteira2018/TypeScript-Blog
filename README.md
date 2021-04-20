@@ -43,7 +43,13 @@ TypeScript와 Koa Framework를 이용해 간단한 블로그와 게시판 기능
 ```
 -bash: nvm: command not found  
 ```
-nvm을 설치했음에도, 터미널을 재실행했음에도, 맥 자체를 재부팅했음에도  
+처음에는 .bash_profile이 생성되고 환경변수를 설정해주지 않아 생긴 문제점으로 판단되어  
+다음과 같은 코드를 작성했습니다.  
+```
+vi ~/.bash_profile  
+export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && . "NVM_DIR/nvm.sh" #This loads nvm
+```
+그러나 환경변수를 설정해도, nvm을 설치했음에도, 터미널을 재실행했음에도, 맥 자체를 재부팅했음에도  
 커맨드를 찾지 못하는 bash의 문제는 재설치를 해도 해결되지 않아  
 다음과 같은 임시 해결책을 사용했었습니다.
 ```
